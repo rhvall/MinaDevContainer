@@ -25,7 +25,8 @@ podman machine start
 podman pull docker.io/library/ubuntu
 
 ## Run the container in detached mode
-PODID=$(podman run -dt -p 8080:80/tcp docker.io/library/ubuntu)
+#PODID=$(podman run -dt --name mdc docker.io/library/ubuntu)
+PODID=$(podman run -dt --name mdc localhost/mina-developer-container)
 podman attach $PODID
 
 ## list created and running containers
