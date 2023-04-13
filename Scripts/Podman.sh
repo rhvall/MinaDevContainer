@@ -1,5 +1,5 @@
 # Created by rhvall
-# Apr 2021
+# Apr 2023
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
@@ -27,3 +27,9 @@ podman pull docker.io/library/ubuntu
 ## Run the container in detached mode
 PODID=$(podman run -dt -p 8080:80/tcp docker.io/library/ubuntu)
 podman attach $PODID
+
+## list created and running containers
+podman ps -a
+
+## Create the container
+podman build -t mina-developer-container .

@@ -15,9 +15,20 @@
 # specific language governing permissions and limitations
 # under the License. 
 
-apt update -y
-mkdir mina
-cd mina
-apt install -y git npm
-git clone https://github.com/rhvall/MinaDevContainer
-npm install -g zkapp-cli
+FROM ubuntu:22.04
+
+LABEL version="0.1"
+LABEL description="Mina Developer Container for quick zkApp development."
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update -y && apt-get install -y git npm
+RUN git clone https://github.com/rhvall/MinaDevContainer --recurse-submodule
+RUN npm install -g zkapp-cli
+
+#COPY docker-entrypoint.sh /entrypoint.sh
+# grr, ENTRYPOINT resets CMD now
+#ENTRYPOINT []
+#CMD [""]
+
+WORKDIR "/MinaDevContainer"
