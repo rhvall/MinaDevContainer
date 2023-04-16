@@ -1,3 +1,4 @@
+#!/bin/bash
 # Created by rhvall
 # Apr 2023
 # Licensed to the Apache Software Foundation (ASF) under one
@@ -26,11 +27,23 @@ podman pull docker.io/library/ubuntu
 
 ## Run the container in detached mode
 #PODID=$(podman run -dt --name mdc docker.io/library/ubuntu)
-PODID=$(podman run -dt --name mdc localhost/mina-developer-container)
+PODID=$(podman run -idt --name mdc localhost/mina-developer-container)
 podman attach $PODID
 
-## list created and running containers
+## List created and running containers
 podman ps -a
+
+## List images
+podman image list -a
+
+## Remove image
+podman image rm localhost/mina-developer-container
 
 ## Create the container
 podman build -t mina-developer-container .
+
+## Get the last image ID from podman
+LAST=$(podman image ls | awk '{print $3}' | sed -n '2p')
+
+## Remove the last image ID 
+podman image rm $(podman image ls | awk '{print $3}' | sed -n '2p')

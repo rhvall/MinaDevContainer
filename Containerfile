@@ -22,9 +22,23 @@ LABEL description="Mina Developer Container for quick zkApp development."
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update -y && apt-get install -y git npm
-RUN git clone https://github.com/rhvall/MinaDevContainer --recurse-submodule
-RUN npm install -g zkapp-cli
+ENV NODE_VERSION=18.16.0
+ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+# shellcheck source=/dev/null
+RUN apt-get -y update \
+    && apt-get -y install --no-install-recommends git=1:2.34.1-1ubuntu1 ca-certificates=20211016 curl=7.81.0-1 libcurl4=7.81.0-1 unzip=6.0-26ubuntu3 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer \
+    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash \
+    && export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  \
+    && nvm install ${NODE_VERSION} \
+    && nvm use v${NODE_VERSION} \
+    && nvm alias default v${NODE_VERSION} \
+    && npm install -g zkapp-cli@0.7.5 #\
+    # && chmod +x MinaDevContainer/Scripts/InstallMina.sh \
+    # && MinaDevContainer/Scripts/InstallMina.sh
 
 #COPY docker-entrypoint.sh /entrypoint.sh
 # grr, ENTRYPOINT resets CMD now
