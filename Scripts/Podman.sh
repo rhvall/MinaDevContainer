@@ -27,7 +27,8 @@ podman pull docker.io/library/ubuntu
 
 ## Run the container in detached mode
 #PODID=$(podman run -dt --name mdc docker.io/library/ubuntu)
-PODID=$(podman run -idt --name mdc localhost/mina-developer-container)
+PODID=$(podman run -idt --rm --name mdc -p 20188:20188 localhost/mina-developer-container)
+PODID=$(podman run -idt --rm --cap-add CAP_AUDIT_WRITE --name ss -p 20188:20188 localhost/sshi)
 podman attach $PODID
 
 ## List created and running containers
@@ -39,11 +40,24 @@ podman image list -a
 ## Remove image
 podman image rm localhost/mina-developer-container
 
-## Create the container
-podman build -t mina-developer-container .
+## Create the container using "Containerfile" and the name "mina-developer-container"
+podman build -t mina-developer-container -f Containerfile
+podman build -t sshi --cap-add=CAP_AUDIT_WRITE -f SSHCont
 
 ## Get the last image ID from podman
 LAST=$(podman image ls | awk '{print $3}' | sed -n '2p')
 
 ## Remove the last image ID 
 podman image rm $(podman image ls | awk '{print $3}' | sed -n '2p')
+
+## Retrieve Container IP
+PODIP=$(podman inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $PODID)
+
+## SSH into container
+ssh -v -i .ssh/idkey.pub root@localhost -p 20188
+ssh -v sshuser@localhost -p 20188
+
+podman exec -it ss /bin/bash
+podman exec -it mdc /bin/bash
+
+podman run -d --rm --name=agent --publish 2200:22 -e "JENKINS_AGENT_SSH_PUBKEY=.ssh/idkey.pub" jenkins/ssh-agent

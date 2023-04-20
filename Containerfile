@@ -22,7 +22,7 @@ LABEL description="Mina Developer Container for quick zkApp development."
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-EXPOSE 22
+EXPOSE 20188
 ENV NODE_VERSION=18.16.0
 ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -30,11 +30,19 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get -y update \
     && apt-get -y install --no-install-recommends git=1:2.34.1-1ubuntu1 ca-certificates=20211016 curl=7.81.0-1 libcurl4=7.81.0-1 unzip=6.0-26ubuntu3 ssh=1:8.9p1-3 \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && echo 'root:password' | chpasswd \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN echo 'root:password' | chpasswd \
+    && sed -i 's/#Port 22/Port 20188/g' /etc/ssh/sshd_config \
     && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config \
-    && service ssh start \
-    && git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer \
+    && sed -i 's/#PasswordAuthentication/PasswordAuthentication/g' /etc/ssh/sshd_config \
+    && sed -i 's|#AuthorizedKeysFile|AuthorizedKeysFile /root/.ssh/authorized_keys|g' /etc/ssh/sshd_config \
+    && sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config \
+    && mkdir /root/.ssh/ \
+    && dpkg-reconfigure openssh-server
+    # && service ssh start 
+
+RUN git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer \
     && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash \
     && export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  \
     && nvm install ${NODE_VERSION} \
@@ -44,6 +52,7 @@ RUN apt-get -y update \
     # && chmod +x MinaDevContainer/Scripts/InstallMina.sh \
     # && MinaDevContainer/Scripts/InstallMina.sh
 
+COPY .ssh/idkey.pub /root/.ssh/authorized_keys
 #COPY docker-entrypoint.sh /entrypoint.sh
 # grr, ENTRYPOINT resets CMD now
 #ENTRYPOINT []
@@ -52,3 +61,6 @@ RUN apt-get -y update \
 CMD ["/usr/sbin/sshd","-D"]
 
 WORKDIR "/MinaDevContainer"
+
+## Enable a bash session
+CMD ["/bin/bash"]
