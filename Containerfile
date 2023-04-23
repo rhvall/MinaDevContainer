@@ -38,7 +38,9 @@ RUN echo 'root:password' | chpasswd \
     && sed -i 's/#PasswordAuthentication/PasswordAuthentication/g' /etc/ssh/sshd_config \
     && sed -i 's|#AuthorizedKeysFile|AuthorizedKeysFile /root/.ssh/authorized_keys|g' /etc/ssh/sshd_config \
     && sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config \
+    # && sed -i 's|#ChrootDirectory none|ChrootDirectory /MinaDevContainer|g' /etc/ssh/sshd_config \
     && mkdir /root/.ssh/ \
+    && mkdir /var/run/sshd \
     && dpkg-reconfigure openssh-server
     # && service ssh start 
 
@@ -48,19 +50,20 @@ RUN git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer \
     && nvm install ${NODE_VERSION} \
     && nvm use v${NODE_VERSION} \
     && nvm alias default v${NODE_VERSION} \
-    && npm install -g zkapp-cli@0.7.5 #\
+    && npm install -g zkapp-cli@0.7.5 
     # && chmod +x MinaDevContainer/Scripts/InstallMina.sh \
     # && MinaDevContainer/Scripts/InstallMina.sh
 
+WORKDIR "/MinaDevContainer"
+
 COPY .ssh/idkey.pub /root/.ssh/authorized_keys
-#COPY docker-entrypoint.sh /entrypoint.sh
+COPY Scripts/Entrypoint.sh /Entrypoint.sh
 # grr, ENTRYPOINT resets CMD now
 #ENTRYPOINT []
 
 ## Start the ssh deamon
-CMD ["/usr/sbin/sshd","-D"]
-
-WORKDIR "/MinaDevContainer"
+ENTRYPOINT ["sh", "/Entrypoint.sh"]
+# CMD ["/usr/sbin/sshd", "-D"]
 
 ## Enable a bash session
-CMD ["/bin/bash"]
+#CMD ["/bin/bash"]
