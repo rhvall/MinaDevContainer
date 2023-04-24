@@ -1,4 +1,6 @@
-!(MinaDevContainer)[/Images/Container.png]
+<div align="center">
+![MinaDevContainer](/Images/Container.png)
+</div>
 
 # MinaDevContainer (MDC)
 
@@ -6,7 +8,7 @@ It is an up-to-date ready-to-go developer environment with all the software nece
 
 ## Features
 
-!(MDC Overview)[/Images/MinaInsightsContainer.png]
+![MDC Overview](/Images/MinaInsightsContainer.png)
 
 - Click-to-run Mina developer environment
 - Open-source repository with everything needed to set up on private computers
