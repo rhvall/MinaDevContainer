@@ -1,8 +1,4 @@
-<div align="center">
-![MinaDevContainer](/Images/Container.png)
-</div>
-
-# MinaDevContainer (MDC)
+# Mina Developer Container (MDC)
 
 It is an up-to-date ready-to-go developer environment with all the software necessary to "compile -> deploy -> run" Mina's ZKApps. Also, it is an isolated work environment that helps new disciples to take advantage of containers to deploy samples. On the other hand, experienced developers can employ replicable dev/test environments to their particular needs.
 
