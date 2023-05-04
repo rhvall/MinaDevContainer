@@ -20,6 +20,7 @@
 ## -- Start
 podman machine init
 podman machine start
+podman machine stop
 ## -- End
 
 ## Get the ubuntu image
