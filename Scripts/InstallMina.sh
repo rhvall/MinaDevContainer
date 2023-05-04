@@ -16,19 +16,14 @@
 # specific language governing permissions and limitations
 # under the License. 
 
-ARCH=""
-case $(uname -m) in
-    i386)   ARCH="386" ;;
-    i686)   ARCH="386" ;;
-    x86_64) ARCH="amd64" ;;
-    arm)    dpkg --print-architecture | grep -q "arm64" && ARCH="arm64" || ARCH="arm" ;;
-esac
-
-if [ "$ARCH" = "arm64" ]; then 
-    echo "Mina does not support ARM architecture"
+ARCH="$(uname -m)"
+ 
+if [ "${ARCH}" = "arm64" ]; then
+    echo "Mina does not support ARM64 architecture"
     exit 1
 fi
-  
+
+echo "Install Mina script"
 echo "deb [trusted=yes] http://packages.o1test.net/ CODENAME unstable" | tee /etc/apt/sources.list.d/mina-unstable.list \
 && apt-get -y update \
 && apt-get -y install --no-install-recommends mina-berkeley=2.0.0rampup1-rampup-b1facec mina-zkapp-test-transaction=2.0.0rampup1-rampup-b1facec
