@@ -23,7 +23,7 @@ if [ "${ARCH}" = "arm64" ]; then
     exit 1
 fi
 
-echo "Install Mina script"
+echo "Install Mina script with $ARCH"
 echo "deb [trusted=yes] http://packages.o1test.net/ CODENAME unstable" | tee /etc/apt/sources.list.d/mina-unstable.list \
 && apt-get -y update \
 && apt-get -y install --no-install-recommends mina-berkeley=2.0.0rampup1-rampup-b1facec mina-zkapp-test-transaction=2.0.0rampup1-rampup-b1facec
