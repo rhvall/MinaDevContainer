@@ -17,8 +17,8 @@
 # under the License. 
 
 ARCH="$(uname -m)"
- 
-if [ "${ARCH}" = "arm64" ]; then
+ISARCH="$(echo $ARCH | grep -e 'arm' -e 'aarch64')"
+if [ ! -z "${ISARCH}" ]; then
     echo "Mina does not support ARM64 architecture"
     exit 1
 fi
