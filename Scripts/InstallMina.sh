@@ -20,7 +20,7 @@ ARCH="$(uname -m)"
 ISARCH="$(echo $ARCH | grep -e 'arm' -e 'aarch64')"
 if [ ! -z "${ISARCH}" ]; then
     echo "Mina does not support ARM64 architecture"
-    exit 1
+    exit 0
 fi
 
 echo "Install Mina script with $ARCH"
