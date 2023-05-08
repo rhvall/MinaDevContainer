@@ -18,4 +18,5 @@
 
 pushd /MinaDevContainer/Dependencies/zkAppExamples
 npm install
+npm run build
 popd

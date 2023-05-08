@@ -55,5 +55,5 @@ PODIP=$(podman inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end
 ## SSH into container
 ssh -v -i .ssh/idkey.pub root@localhost -p 20188
 
-podman exec -it mdc /bin/bash
 # podman  exec -it ubu /bin/bash
+podman exec -it mdc /bin/bash
