@@ -20,13 +20,14 @@
 ## -- Start
 podman machine init
 podman machine start
+podman machine stop
 ## -- End
 
 ## Get the ubuntu image
 podman pull docker.io/library/ubuntu
 
 ## Run the container in detached mode
-#PODID=$(podman run -dt --name mdc docker.io/library/ubuntu)
+#PODID=$(podman run -idt --rm --name ubu docker.io/library/ubuntu)
 PODID=$(podman run -idt --rm --name mdc -p 20188:20188 localhost/mina-developer-container)
 podman attach $PODID
 
@@ -54,4 +55,5 @@ PODIP=$(podman inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end
 ## SSH into container
 ssh -v -i .ssh/idkey.pub root@localhost -p 20188
 
+# podman  exec -it ubu /bin/bash
 podman exec -it mdc /bin/bash

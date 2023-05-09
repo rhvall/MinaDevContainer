@@ -1,6 +1,3 @@
-[submodule "Dependencies/snarkyjs"]
-	path = Dependencies/snarkyjs
-	url = https://github.com/o1-labs/snarkyjs
 [submodule "Dependencies/zkAppExamples"]
 	path = Dependencies/zkAppExamples
 	url = https://github.com/rhvall/zkAppExamples/

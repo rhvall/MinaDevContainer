@@ -44,15 +44,18 @@ RUN echo 'root:password' | chpasswd \
     && dpkg-reconfigure openssh-server
     # && service ssh start 
 
-RUN git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer \
+RUN pushd / \
+    && git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer -b Release \
     && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash \
     && export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  \
     && nvm install ${NODE_VERSION} \
     && nvm use v${NODE_VERSION} \
     && nvm alias default v${NODE_VERSION} \
-    && npm install -g zkapp-cli@0.7.5 
-    # && chmod +x MinaDevContainer/Scripts/InstallMina.sh \
-    # && MinaDevContainer/Scripts/InstallMina.sh
+    && npm install -g zkapp-cli@0.7.5 \
+    && chmod +x /MinaDevContainer/Scripts/InstallMina.sh \
+    && chmod +x /MinaDevContainer/Scripts/InstallzkAppExamples.sh \
+    && /MinaDevContainer/Scripts/InstallMina.sh \
+    && /MinaDevContainer/Scripts/InstallzkAppExamples.sh 
 
 WORKDIR "/MinaDevContainer"
 

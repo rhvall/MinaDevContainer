@@ -16,15 +16,7 @@
 # specific language governing permissions and limitations
 # under the License. 
 
-ARCH="$(uname -m)"
-ISARCH="$(echo $ARCH | grep -e 'arm' -e 'aarch64')"
-if [ ! -z "${ISARCH}" ]; then
-    echo "Mina does not support ARM64 architecture"
-    exit 0
-fi
-
-echo "Install Mina script with $ARCH"
-echo "deb [trusted=yes] http://packages.o1test.net/ CODENAME unstable" | tee /etc/apt/sources.list.d/mina-unstable.list \
-&& apt-get -y update \
-&& apt-get -y install --no-install-recommends mina-berkeley=2.0.0rampup1-rampup-b1facec mina-zkapp-test-transaction=2.0.0rampup1-rampup-b1facec
-#mina-mainnet=1.3.1.2-25388a0 
+pushd /MinaDevContainer/Dependencies/zkAppExamples
+npm install
+npm run build
+popd
