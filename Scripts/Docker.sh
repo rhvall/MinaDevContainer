@@ -20,7 +20,8 @@
 docker pull docker.io/library/ubuntu
 
 ## Run the container in detached mode
-#PODID=$(docker run -dt --name mdc docker.io/library/ubuntu)
+#PODID=$(docker run -idt --rm --name mdc docker.io/library/ubuntu)
+#PODID=$(docker run -idt --rm --name mdc gcr.io/o1labs-192920/mina-daemon:2.0.0rampup2-42d2005-bullseye-berkeley)
 PODID=$(docker run -idt --rm --name mdc -p 20188:20188 mina-developer-container)
 docker attach $PODID
 

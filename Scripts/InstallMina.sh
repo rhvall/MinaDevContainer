@@ -24,7 +24,10 @@ if [ ! -z "${ISARCH}" ]; then
 fi
 
 echo "Install Mina script with $ARCH"
-echo "deb [trusted=yes] http://packages.o1test.net/ CODENAME unstable" | tee /etc/apt/sources.list.d/mina-unstable.list \
-&& apt-get -y update \
-&& apt-get -y install --no-install-recommends mina-berkeley=2.0.0rampup1-rampup-b1facec mina-zkapp-test-transaction=2.0.0rampup1-rampup-b1facec
+echo "deb [trusted=yes] http://packages.o1test.net/ bullseye rampup" | tee /etc/apt/sources.list.d/mina-rampup.list
+apt-get -y update
+ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+DEBIAN_FRONTEND=noninteractive 
+apt-get install -y --no-install-recommends tzdata
+apt-get -y install mina-berkeley=2.0.0rampup2-42d2005 mina-archive=2.0.0rampup2-42d2005 mina-zkapp-test-transaction=2.0.0rampup2-42d2005
 #mina-mainnet=1.3.1.2-25388a0 

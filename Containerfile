@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License. 
 
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 
 LABEL version="0.1"
 LABEL description="Mina Developer Container for quick zkApp development."
@@ -28,7 +28,7 @@ ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # shellcheck source=/dev/null
 RUN apt-get -y update \
-    && apt-get -y install --no-install-recommends git=1:2.34.1-1ubuntu1 ca-certificates=20211016 curl=7.81.0-1 libcurl4=7.81.0-1 unzip=6.0-26ubuntu3 ssh=1:8.9p1-3 \
+    && apt-get -y install --no-install-recommends git=1:2.25.1-1ubuntu3.11 ca-certificates=20211016ubuntu0.20.04.1 curl=7.68.0-1ubuntu2.18 libcurl4=7.68.0-1ubuntu2.18 unzip=6.0-25ubuntu1.1 ssh=1:8.2p1-4ubuntu0.5 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -44,8 +44,7 @@ RUN echo 'root:password' | chpasswd \
     && dpkg-reconfigure openssh-server
     # && service ssh start 
 
-RUN pushd / \
-    && git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer -b Release \
+RUN git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer -b Release \
     && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash \
     && export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  \
     && nvm install ${NODE_VERSION} \
