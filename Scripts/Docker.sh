@@ -20,8 +20,10 @@
 docker pull docker.io/library/ubuntu
 
 ## Run the container in detached mode
-#PODID=$(docker run -idt --rm --name mdc docker.io/library/ubuntu)
+#PODID=$(docker run -idt --rm --name mdc docker.io/library/ubuntu:20.04)
 #PODID=$(docker run -idt --rm --name mdc gcr.io/o1labs-192920/mina-daemon:2.0.0rampup2-42d2005-bullseye-berkeley)
+## If you need to specify a specific folder within the local environment, use "-v"
+# PODID=$(docker run -idt --rm --name mdc -p 20188:20188 -v ./zkApp:/zkApp mina-developer-container)
 PODID=$(docker run -idt --rm --name mdc -p 20188:20188 mina-developer-container)
 docker attach $PODID
 
@@ -53,9 +55,9 @@ PODIP=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end
 ssh -v -i .ssh/idkey root@localhost -p 20188
 ssh -v sshuser@localhost -p 20188
 
+## Execute a bash session within the mdc running container
 docker exec -it mdc /bin/bash
 
-docker run -d --rm --name=agent --publish 2200:22 -e "JENKINS_AGENT_SSH_PUBKEY=.ssh/idkey.pub" jenkins/ssh-agent
-
+## Remove the last image and build it again
 docker image rm $(docker image ls | awk '{print $3}' | sed -n '2p') && docker build -t mina-developer-container -f Containerfile .
 PODID=$(docker run -idt --rm --name mdc -p 20188:20188 mina-developer-container) && sleep 2 && docker ps -a 
