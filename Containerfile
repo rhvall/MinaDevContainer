@@ -28,7 +28,7 @@ ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # shellcheck source=/dev/null
 RUN apt-get -y update \
-    && apt-get -y install --no-install-recommends git=1:2.25.1-1ubuntu3.11 ca-certificates=20211016ubuntu0.20.04.1 curl=7.68.0-1ubuntu2.18 libcurl4=7.68.0-1ubuntu2.18 unzip=6.0-25ubuntu1.1 ssh=1:8.2p1-4ubuntu0.5 \
+    && apt-get -y install --no-install-recommends git=1:2.25.1-1ubuntu3.11 ca-certificates=20230311ubuntu0.20.04.1 curl=7.68.0-1ubuntu2.18 libcurl4=7.68.0-1ubuntu2.18 unzip=6.0-25ubuntu1.1 ssh=1:8.2p1-4ubuntu0.7 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
