@@ -25,8 +25,8 @@ ports:
 
 vscode:
   extensions:
-    -asciidoctor.asciidoctor-vscode@2.9.8
-    -jeff-hykin.better-dockerfile-syntax@10.2
-    -exiasr.hadolint@1.1.2
-    -zaaack.markdown-editor@0.1.9
-    -bungcip.better-toml@0.3.2
+    - asciidoctor.asciidoctor-vscode@2.9.8
+    - jeff-hykin.better-dockerfile-syntax@10.2
+    - exiasr.hadolint@1.1.2
+    - zaaack.markdown-editor@0.1.9
+    - bungcip.better-toml@0.3.2
