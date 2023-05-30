@@ -44,7 +44,7 @@ RUN echo 'root:password' | chpasswd \
     && dpkg-reconfigure openssh-server
     # && service ssh start 
 
-RUN git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer -b Release \
+RUN git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer -b Release ~/MinaDevContainer \
     && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash \
     && export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  \
     && nvm install ${NODE_VERSION} \
@@ -56,7 +56,7 @@ RUN git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer -b
     && /MinaDevContainer/Scripts/InstallMina.sh \
     && /MinaDevContainer/Scripts/InstallzkAppExamples.sh 
 
-WORKDIR "/MinaDevContainer"
+WORKDIR "~/MinaDevContainer"
 
 COPY .ssh/idkey.pub /root/.ssh/authorized_keys
 COPY Scripts/Entrypoint.sh /Entrypoint.sh
