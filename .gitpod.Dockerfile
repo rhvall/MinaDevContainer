@@ -25,13 +25,15 @@ ARG DEBIAN_FRONTEND=noninteractive
 EXPOSE 20188
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # shellcheck source=/dev/null
-RUN git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer -b Release ~/MinaDevContainer \
+RUN git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer -b Gitpod-860qfntjf \
     && echo "deb http://security.ubuntu.com/ubuntu focal-security main" | sudo tee /etc/apt/sources.list.d/focal-security.list \
     && sudo apt-get update \
     && sudo apt-get install libssl1.1 \
     && chmod +x MinaDevContainer/Scripts/InstallMina.sh \
-    && chmod +x MinaDevContainer/Scripts/InstallzkAppExamples.sh \
     && sudo MinaDevContainer/Scripts/InstallMina.sh \
-    && sudo MinaDevContainer/Scripts/InstallzkAppExamples.sh
+    && pushd MinaDevContainer/Dependencies/zkAppExamples \
+    && npm install \
+    && npm run build \
+    && popd
 
 WORKDIR "~/MinaDevContainer"
