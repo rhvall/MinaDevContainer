@@ -24,10 +24,11 @@ ports:
     onOpen: open-preview
 
 tasks:
+  - name: Remove git clone from home
+    command: rm -rf ~/MinaDevContainer/
   - name: Compile examples
-    init: cd /workspace/MinaDevContainer/Dependencies/zkAppExamples
-    command: npm install && npm run build
-    
+    command: cd /workspace/MinaDevContainer/Dependencies/zkAppExamples && npm install && npm run build
+  
 vscode:
   extensions:
     - asciidoctor.asciidoctor-vscode@2.9.8
