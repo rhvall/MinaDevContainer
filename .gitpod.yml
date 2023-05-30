@@ -23,6 +23,11 @@ ports:
     port: 3000
     onOpen: open-preview
 
+tasks:
+  - name: Compile examples
+    init: cd /workspace/MinaDevContainer/Dependencies/zkAppExamples
+    command: npm install && npm run build
+    
 vscode:
   extensions:
     - asciidoctor.asciidoctor-vscode@2.9.8
