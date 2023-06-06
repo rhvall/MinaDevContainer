@@ -23,6 +23,8 @@ LABEL description="Mina Developer Container for quick zkApp development with Git
 ARG DEBIAN_FRONTEND=noninteractive
 
 EXPOSE 20188
+## Expose 3000 for the zkAppUI example
+EXPOSE 3000
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # shellcheck source=/dev/null
 RUN git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer -b Gitpod-860qfntjf \
@@ -34,6 +36,9 @@ RUN git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer -b
     && pushd MinaDevContainer/Dependencies/zkAppExamples \
     && npm install \
     && npm run build \
-    && popd
+    && pushd 04-zkapp-ui \
+    && npm install \
+    && npm run build \
+    && popd && popd
 
 WORKDIR "~/MinaDevContainer"

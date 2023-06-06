@@ -23,6 +23,8 @@ LABEL description="Mina Developer Container for quick zkApp development."
 ARG DEBIAN_FRONTEND=noninteractive
 
 EXPOSE 20188
+## Expose 3000 for the zkAppUI example
+EXPOSE 3000
 ENV NODE_VERSION=18.16.0
 ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]

@@ -19,4 +19,8 @@
 pushd /MinaDevContainer/Dependencies/zkAppExamples
 npm install
 npm run build
+pushd 04-zkapp-ui
+npm install
+npm run build
+popd
 popd
