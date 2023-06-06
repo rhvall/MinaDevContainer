@@ -38,7 +38,7 @@ RUN git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer -b
     && npm run build \
     && pushd 04-zkapp-ui \
     && npm install \
-    &6 nom run build \
+    &6 npm run build \
     && popd && popd
 
 WORKDIR "~/MinaDevContainer"
