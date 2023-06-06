@@ -27,7 +27,7 @@ EXPOSE 20188
 EXPOSE 3000
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # shellcheck source=/dev/null
-RUN git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer -b Gitpod-860qfntjf \
+RUN git clone --recurse-submodules https://github.com/rhvall/MinaDevContainer -b Release \
     && echo "deb http://security.ubuntu.com/ubuntu focal-security main" | sudo tee /etc/apt/sources.list.d/focal-security.list \
     && sudo apt-get update \
     && sudo apt-get install libssl1.1 \
