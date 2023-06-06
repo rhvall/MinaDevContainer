@@ -21,6 +21,5 @@ npm install
 npm run build
 pushd 04-zkapp-ui
 npm install
-npm run build
 popd
 popd
