@@ -61,3 +61,7 @@ docker exec -it mdc /bin/bash
 ## Remove the last image and build it again
 docker image rm $(docker image ls | awk '{print $3}' | sed -n '2p') && docker build -t mina-developer-container -f Containerfile .
 PODID=$(docker run -idt --rm --name mdc -p 20188:20188 mina-developer-container) && sleep 2 && docker ps -a 
+
+## Publish to docker hub
+docker tag mina-developer-container minadevcont/mina-developer-container
+docker push minadevcont/mina-developer-container

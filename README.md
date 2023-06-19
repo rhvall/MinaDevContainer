@@ -32,7 +32,7 @@ The simplest way is to `pull` the container from the docker registry as follows 
 
 ```
 ## Get the MDC image
-docker pull docker.io/library/mina-developer-container
+docker pull minadevcont/mina-developer-container
 ## Run the MDC
 docker run -idt --rm --name mdc -p 20188:20188 mina-developer-container
 ```
@@ -42,7 +42,9 @@ To break down the commands:
 - `name`: The name of the container
 - `p`: The port to associate to the container. This instance use 20188 to expose the SSH connection.
 
-If you are iterating the container deployment, file [Docker.sh](/Scripts/Docker.sh) contains multiple commands that could guide you to administrate your MDC
+If you are iterating the container deployment, file [Docker.sh](/Scripts/Docker.sh) contains multiple commands that could guide you to administrate your MDC.
+
+The container is located in [dockerhub](https://hub.docker.com/r/minadevcont/mina-developer-container).
 
 ## Local interface dependencies
 
