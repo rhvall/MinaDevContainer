@@ -1,7 +1,7 @@
-# Mina Developer Container (MDC)
+# [Mina Developer Container (MDC)](https://container.minadev.eth.limo)
 [![Open in Gitpod](Images/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/rhvall/MinaDevContainer)
 
-It is an up-to-date ready-to-go developer environment with all the software necessary to "compile -> deploy -> run" Mina's ZKApps. Also, it is an isolated work environment that helps new disciples to take advantage of containers to deploy samples. On the other hand, experienced developers can employ replicable dev/test environments to their particular needs.
+A comprehensive developer environment for Mina's ZKApps, offering all the necessary software to "compile -> deploy -> run". Whether you're a newcomer or an experienced developer, the Mina Developer Container provides an isolated workspace with a repository deployment for easy exploration and replicable dev/test environments for customization. Simplify your workflow and unleash your creativity with a ready-to-go environment.
 
 ## Features
 
@@ -22,9 +22,9 @@ According ot the way you execute the MDC project, you will have different depend
 
 ## MDC deployment
 
-To deploy MDC in your computer or a remote server, you will first need to [install Docker](https://docs.docker.com/get-docker/) according to the operative system you use. 
+To deploy MDC in your computer or a remote server, you will first need to [install Docker](https://docs.docker.com/get-docker/) (or [Podman](https://podman.io/)) according to the operative system you use. 
 
-**_NOTE:_** If you need to run a Mina node, you will require an x86 computer
+**_NOTE:_** If you need to run a Mina node, you will require an `x86` computer
 
 ### Running the container
 
@@ -66,18 +66,22 @@ Once you are connected to the container, you can access a clone of this reposito
 
 - Images: PNG Digital assets
 - Scripts: Code that helps to run and interact with third party tools 
-- Dependencies: The Mina, SnarkyJS and zkApp examples repositories
+- Dependencies: The Mina zkApp examples repository
 
 Therefore, to run the zkApp "Hello World", it is as simple as running these commands:
 
 ```
-cd /MinaDevContainer/Dependencies/zkApp-Examples/01-hello-world
+cd /MinaDevContainer/Dependencies/zkApp-Examples/
 npm install
 npm run build
-npm run test
+npm run main01
 ```
 
 These lines will change the current directory, install and compile the zkApp example.
+
+## Documentation
+
+Read more about the MDC [here](https://github.com/rhvall/MinaDevContainer/wiki) 
 
 ## License
 [Apache-2.0](/LICENSE)
