@@ -24,7 +24,7 @@ docker pull docker.io/library/ubuntu
 #PODID=$(docker run -idt --rm --name mdc gcr.io/o1labs-192920/mina-daemon:2.0.0rampup2-42d2005-bullseye-berkeley)
 ## If you need to specify a specific folder within the local environment, use "-v"
 # PODID=$(docker run -idt --rm --name mdc -p 20188:20188 -v ./zkApp:/zkApp mina-developer-container)
-PODID=$(docker run -idt --rm --name mdc -p 20188:20188 mina-developer-container)
+PODID=$(docker run -idt --rm --name mdc -p 20188:20188 -p 30000:3000 mina-developer-container)
 docker attach $PODID
 
 ## Stop container, if "--rm", it will remove it
