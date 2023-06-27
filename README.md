@@ -14,11 +14,11 @@ A comprehensive developer environment for Mina's ZKApps, offering all the necess
 
 Once deployed, the "Mina Developer Container (MDC)" fulfills the needs of new and advanced developers with three run modes:
 
-- [Remote deployment, web interface](/Images/RemoteWeb.png): In this mode, any user would just sign in with an account, press play, and a Cloud VM will deploy the MDC. The interface shown to the user would be an instance of VSCode configured with all the software needed to deploy the tutorials or custom code.
-- [Remote deployment, local interface](/Images/RemoteLocal.png): Using VSCode SSH remote desktop, is as simple as deploying MDC on a powerful Cloud VM and connecting to the IP of that instance. When compiling and creating proofs, it uses remote resources, not local ones.
-- [Local deployment, local interface](/Images/LocalLocal.png): More advanced users would be able to deploy a local MDC running docker in their computer. This mode would also consider VSCode SSH remote desktop, but using the resources in the user's computer.
+- [Remote development, Remote execution](/Images/RemoteWeb.png): In this mode, any user would just sign in with an account, press play, and a Cloud VM will deploy the MDC. The interface shown to the user would be an instance of VSCode configured with all the software needed to deploy the tutorials or custom code. Follow the [Gitpod link]((https://gitpod.io/#https://github.com/rhvall/MinaDevContainer)) to start coding right away.
+- [Local development, Remote execution](/Images/RemoteLocal.png): Using VSCode SSH remote desktop, is as simple as deploying MDC on a powerful Cloud VM and connecting to the IP of that instance. When compiling and creating proofs, it uses remote resources, not local ones.
+- [Local development, Local execution](/Images/LocalLocal.png): More advanced users would be able to deploy a local MDC running docker in their computer. This mode would also consider VSCode SSH remote desktop, but using the resources in the user's computer.
 
-According ot the way you execute the MDC project, you will have different dependencies. The easiest way to execute is to connect to the online service using the "Remote deployment & Web interface".
+According ot the way you execute the MDC project, you will have different dependencies. The easiest way to execute is to connect to the online service using the `Remote development, Remote execution`.
 
 ## MDC deployment
 

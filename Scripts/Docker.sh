@@ -17,7 +17,10 @@
 # under the License. 
 
 ## Get the ubuntu image
-docker pull docker.io/library/ubuntu
+#docker pull docker.io/library/ubuntu
+
+## Get the MDC image
+docker pull minadevcont/mina-developer-container
 
 ## Run the container in detached mode
 #PODID=$(docker run -idt --rm --name mdc docker.io/library/ubuntu:20.04)
