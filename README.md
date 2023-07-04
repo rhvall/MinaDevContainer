@@ -46,6 +46,22 @@ If you are iterating the container deployment, file [Docker.sh](/Scripts/Docker.
 
 The container is located in [dockerhub](https://hub.docker.com/r/minadevcont/mina-developer-container).
 
+### Descentralized image
+
+If you would like to retrieve the compiled image, you can download the container from the following link:
+
+[https://link.storjshare.io/jw5touifgahela43b3z6i4ai77uq/mdc-images%2FMDC-d7813e3.tar.gz](https://link.storjshare.io/jw5touifgahela43b3z6i4ai77uq/mdc-images%2FMDC-d7813e3.tar.gz)
+
+Once downloaded, you can load it into docker as follows:
+
+```
+docker load < MDC-d7813e3.tar.gz
+```
+
+When it finishes, you can see the image loaded in your local instance using `docker images`
+
+Consider that `d7813e3` is the commit that the container was build with. 
+
 ## Local interface dependencies
 
 The recommended way to develop with a local experience connecting to the container is using [Visual Studio Code](https://code.visualstudio.com/) with the [Remote Development Plugin](https://code.visualstudio.com/docs/remote/ssh)
